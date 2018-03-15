@@ -1,0 +1,28 @@
+<% today = DateTime.now %>
+<table>
+  <tr>
+    <td colspan="2"><%= today.to_s(:day_name) %><br />
+      <%= today.to_s(:short_date) %></td>
+    <td class="centered" colspan="2">NORTH STATION TRAIN INFORMATION</td>
+    <td class="right" colspan="2">CURRENT TIME<br />
+      <%= today.to_s(:short_time) %></td>
+  </tr>
+  <tr>
+    <th>CARRIER</th>
+    <th>TIME</th>
+    <th>DESTINATION</th>
+    <th>TRAIN#</th>
+    <th>TRACK#</th>
+    <th>STATUS</th>
+  </tr>
+  <% @output.each do |row| %>
+    <tr>
+      <td>MBTA</td>
+      <td class="right"><%= scheduled_time(row['ScheduledTime']) %></td>
+      <td><%= row['Destination'].upcase %></td>
+      <td><%= row['Trip'] %></td>
+      <td class="centered"><%= track(row['Track']) %></td>
+      <td><%= row['Status'].upcase %></td>
+  </tr>
+  <% end %>
+</table>
